@@ -4,11 +4,11 @@
         <ion-toolbar>
             <ion-grid fixed>
                 <ion-row>
-                    <ion-col size='6'>  
+                    <ion-col size='11'>  
                             <ion-title>QuadSquad</ion-title>
                     </ion-col>
-                    <ion-col size='6'>
-                      <ion-button @click="() => router.push('/settings')">
+                    <ion-col size='1'>
+                      <ion-button @click='() => router.push("/settings")'>
                           <ion-icon size='large' name='cog'></ion-icon>
                       </ion-button>
                     </ion-col>
@@ -23,26 +23,54 @@
           <ion-title size='large'>QuadSquad</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <div id='container'>
-        <ion-button v-on:click='onClick()'>
-          Click me
-        </ion-button>
-        <ion-text color='primary'>
-          <h1 id='text'></h1>
-        </ion-text>
-      </div>
+
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Get</ion-label>
+                <ion-toggle checked @ionChange='this.get = !this.get'></ion-toggle>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position='stacked'>Endpoint</ion-label>
+                <ion-input placeholder='/' @input='this.endpoint = $event.target.value'></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position='stacked'>Request Data</ion-label>
+                <br>
+                <ion-text>
+                  {{ data }}
+                  <br><br>
+                  {{ status }}
+                  <br><br>
+                  {{ url }}
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-button v-on:click="request()">
+                Request
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang='ts'>
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, alertController } from '@ionic/vue';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonItem, IonToggle } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
-
-const SERVERIP = 'http://192.168.0.198:5000/';
+import piCommunication from '../components/pi-communication.vue';
+import axios from 'axios';
+import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'ControlCentre',
@@ -51,24 +79,42 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonCard,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonItem,
+    IonToggle
   },
   setup() {
     const router = useRouter();
     return { router };
   },
+  data() {
+    return {
+      data: '',
+      status: '',
+      url: '',
+      endpoint: '',
+      get: true
+    }
+  },
   methods: {
-    async onClick() {
-      let serv: string;
-      const val = this.$el.querySelector('#server').value
-      if(val != ''){
-        serv = 'http://' + val + ':5000/';
-      }else {
-        serv = SERVERIP
+    async request(){
+      let request: AxiosResponse;
+      try{
+        if(this.get){
+          request = await piCommunication.getPiEndpoint(this.endpoint);
+        }else {
+          request = await piCommunication.postPiEndpoint('controls/up/100.0');
+        }
+        this.data = 'data: ' + request.data
+        this.status = 'status: ' + request['status']
+        this.url = 'url: ' + request.config.url
+      } catch(Error) {
+        this.data = Error;
       }
-      const data = await axios.get(serv);
-      console.log(data);
-      this.$el.querySelector('#text').innerText = data.data;
     }
   }
 });
