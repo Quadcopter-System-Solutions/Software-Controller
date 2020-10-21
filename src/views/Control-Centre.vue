@@ -22,7 +22,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
+    <ion-content v-bind:scrollY="scroll" ref="content" :fullscreen="true">
       <ion-card>
         <ion-grid>
           <ion-col>
@@ -75,11 +75,12 @@
           </ion-col>
         </ion-grid>
       </ion-card>
+      <flight-control></flight-control>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import {
   IonContent,
   IonHeader,
@@ -95,7 +96,7 @@ import {
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import piCommunication from "../components/pi-communication.vue";
-import { AxiosResponse } from "axios";
+import flightControl from "../components/flight-control.vue";
 
 export default defineComponent({
   name: "ControlCentre",
@@ -110,6 +111,7 @@ export default defineComponent({
     IonCol,
     IonItem,
     IonToggle,
+    flightControl,
   },
   setup() {
     const router = useRouter();
@@ -122,11 +124,12 @@ export default defineComponent({
       url: "",
       endpoint: "",
       get: true,
+      scroll: true,
     };
   },
   methods: {
     async request() {
-      let request: AxiosResponse;
+      let request;
       try {
         if (this.get) {
           request = await piCommunication.getPiEndpoint(this.endpoint);
@@ -139,6 +142,9 @@ export default defineComponent({
       } catch (Error) {
         this.data = Error;
       }
+    },
+    toggleScroll() {
+      this.scroll = !this.scroll;
     },
   },
 });

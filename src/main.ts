@@ -24,17 +24,21 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 import { addIcons } from "ionicons";
-import { cog, home } from "ionicons/icons";
+import { cog, home, chevronUpOutline, chevronDownOutline, returnUpBackOutline, returnUpForwardOutline } from "ionicons/icons";
 
 addIcons({
   "cog": cog,
   "home": home,
+  "chevron-up": chevronUpOutline,
+  "chevron-down": chevronDownOutline,
+  "return-up-back": returnUpBackOutline,
+  "return-up-forward": returnUpForwardOutline,
 });
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-  
+
 router.isReady().then(() => {
   app.mount('#app');
 });
