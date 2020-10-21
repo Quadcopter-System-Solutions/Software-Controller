@@ -103,10 +103,11 @@ export default defineComponent({
           centreY: tmp.y + radius,
         };
       }
+
       const currentX = detail.currentX;
       const currentY = detail.currentY;
       const relativeX = currentX - this.position.centreX;
-      const relativeY = this.position.centreY - currentY;
+      const relativeY = -(currentY - this.position.centreY);
 
       this.$refs.pa.innerHTML = `
             <div>Current X: ${currentX}</div>
