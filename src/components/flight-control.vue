@@ -2,10 +2,11 @@
   <ion-card>
     <ion-grid>
       <ion-row>
-        <ion-col></ion-col>
-        <ion-col size="6">
-          <div ref="controlGesture" class="flight-control-gestures"></div>
+        <ion-col>
           <p ref="pa">hello world</p>
+        </ion-col>
+        <ion-col size="7">
+          <div ref="controlGesture" class="flight-control-gestures"></div>
         </ion-col>
       </ion-row>
       <ion-row>

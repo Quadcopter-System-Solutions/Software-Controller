@@ -24,7 +24,7 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 import { addIcons } from "ionicons";
-import { cog, home, chevronUpOutline, chevronDownOutline, returnUpBackOutline, returnUpForwardOutline } from "ionicons/icons";
+import { cog, home, chevronUpOutline, chevronDownOutline, returnUpBackOutline, returnUpForwardOutline, hammerOutline } from "ionicons/icons";
 
 addIcons({
   "cog": cog,
@@ -33,6 +33,7 @@ addIcons({
   "chevron-down": chevronDownOutline,
   "return-up-back": returnUpBackOutline,
   "return-up-forward": returnUpForwardOutline,
+  "hammer": hammerOutline,
 });
 
 const app = createApp(App)
