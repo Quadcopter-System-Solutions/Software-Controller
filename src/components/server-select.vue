@@ -14,6 +14,7 @@
 <script>
 import { IonCard, IonLabel, IonInput } from "@ionic/vue";
 
+// Alex's local Pi IP
 const defaultServerIP = "192.168.0.198";
 
 // For testing on local

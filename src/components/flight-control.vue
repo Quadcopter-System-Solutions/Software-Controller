@@ -1,21 +1,22 @@
 <template>
-  <ion-card>
+  <ion-card class=" ion-no-margin">
     <ion-grid>
       <ion-row>
         <ion-col>
-          <p ref="pa">hello world</p>
+            <h4>Gesture data</h4>
+          <p ref="data"></p>
         </ion-col>
         <ion-col size="7">
           <div ref="controlGesture" class="flight-control-gestures"></div>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="6">
+        <ion-col size="7">
           <ion-col class="flight-control-buttons">
             <ion-row>
               <ion-col size="4"></ion-col>
               <ion-col size="4">
-                <ion-button color="dark" v-on:click="onClick()">
+                <ion-button color="dark" v-on:click="elevation(true)">
                   <ion-icon size="medium" name="chevron-up"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -23,13 +24,13 @@
             </ion-row>
             <ion-row>
               <ion-col size="4">
-                <ion-button color="dark" v-on:click="onClick()">
+                <ion-button color="dark" v-on:click="rotate(true)">
                   <ion-icon size="medium" name="return-up-back"></ion-icon>
                 </ion-button>
               </ion-col>
               <ion-col size="4"></ion-col>
               <ion-col size="4">
-                <ion-button color="dark" v-on:click="onClick()">
+                <ion-button color="dark" v-on:click="rotate(false)">
                   <ion-icon size="medium" name="return-up-forward"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -37,7 +38,7 @@
             <ion-row>
               <ion-col size="4"></ion-col>
               <ion-col size="4">
-                <ion-button color="dark" v-on:click="onClick()">
+                <ion-button color="dark" v-on:click="elevation(false)">
                   <ion-icon size="medium" name="chevron-down"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -54,6 +55,7 @@
 <script>
 import { defineComponent } from "vue";
 import { IonCard, createGesture } from "@ionic/vue";
+import piCommunication from "../components/pi-communication.vue";
 
 export default defineComponent({
   name: "flightControl",
@@ -109,13 +111,46 @@ export default defineComponent({
       const currentY = detail.currentY;
       const relativeX = currentX - this.position.centreX;
       const relativeY = -(currentY - this.position.centreY);
+      const accelerationX = relativeX / this.position.radius;
+      const accelerationY = relativeY / this.position.radius;
+      
+      const roundedCurrentX = (Math.round(currentX * 10) / 10).toFixed(1);
+      const roundedCurrentY = (Math.round(currentY * 10) / 10).toFixed(1);
+      const roundedrelativeX = (Math.round(relativeX * 10) / 10).toFixed(1);
+      const roundedrelativeY = (Math.round(relativeY * 10) / 10).toFixed(1);
+      const roundedAccelX = (Math.round(accelerationX * 100 * 10) / 10).toFixed(1);
+      const roundedAccelY = (Math.round(accelerationY * 100 * 10) / 10).toFixed(1);
 
-      this.$refs.pa.innerHTML = `
-            <div>Current X: ${currentX}</div>
-            <div>Current Y: ${currentY}</div>
-            <div>Relative X: ${relativeX}</div>
-            <div>Relative Y: ${relativeY}</div>
+      this.$refs.data.innerHTML = `
+            <div>Current X: ${roundedCurrentX}</div>
+            <div>Current Y: ${roundedCurrentY}</div>
+            <div>Relative X: ${roundedrelativeX}</div>
+            <div>Relative Y: ${roundedrelativeY}</div>
+            <div>Accel x: ${roundedAccelX} %</div>
+            <div>Accel Y: ${roundedAccelY} %</div>
         `;
+    },
+    async elevation(ascend){
+        if(ascend){
+            console.log("ascend:");
+            const request = await piCommunication.getPiEndpoint("");
+            console.log('Pi response: ' + request.data)
+        }else {ƒ
+            console.log("descend");
+            const request = await piCommunication.getPiEndpoint("");
+            console.log('Pi response: ' + request.data)
+        }
+    },
+    async rotate(clockwise){
+        if(clockwise){
+            console.log("clockwise");
+            const request = await piCommunication.getPiEndpoint("");
+            console.log('Pi response: ' + request.data)
+        }else {
+            console.log("counter-clockwise");
+            const request = await piCommunication.getPiEndpoint("");
+            console.log('Pi response: ' + request.data)
+        }
     },
     getParent(name) {
       let p = this.$parent;

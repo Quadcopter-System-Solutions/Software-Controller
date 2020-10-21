@@ -28,7 +28,18 @@
     </ion-header>
 
     <ion-content v-bind:scrollY="scroll" ref="content" :fullscreen="true">
-      <flight-control></flight-control>
+      <ion-grid>
+        <ion-row class="ion-no-padding" height="auto" size="9">
+          <ion-col class="ion-no-padding">
+            <video-streamer></video-streamer>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-no-padding" height="auto" size="3">
+          <ion-col class="ion-no-padding">
+            <flight-control></flight-control>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-content>
   </ion-page>
 </template>
@@ -46,6 +57,7 @@ import {
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import flightControl from "../components/flight-control.vue";
+import videoStreamer from "../components/video-streamer.vue";
 
 export default defineComponent({
   name: "ControlCentre",
@@ -58,6 +70,7 @@ export default defineComponent({
     IonRow,
     IonCol,
     flightControl,
+    videoStreamer,
   },
   setup() {
     const router = useRouter();
@@ -77,6 +90,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.content-grid {
+  height: 100vh;
+}
+
 #container {
   text-align: center;
 
