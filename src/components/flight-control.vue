@@ -135,7 +135,7 @@ export default defineComponent({
             console.log("ascend:");
             const request = await piCommunication.getPiEndpoint("");
             console.log('Pi response: ' + request.data)
-        }else {ƒ
+        }else {
             console.log("descend");
             const request = await piCommunication.getPiEndpoint("");
             console.log('Pi response: ' + request.data)
