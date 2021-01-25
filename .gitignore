@@ -29,3 +29,10 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+/.expo
+/.expo-shared
+
+# macOS
+.DS_Store
+
