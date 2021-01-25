@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ControllerApp",
-    "slug": "ControllerApp",
+    "name": "Controller",
+    "slug": "Controller",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/icon.png",
@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {
