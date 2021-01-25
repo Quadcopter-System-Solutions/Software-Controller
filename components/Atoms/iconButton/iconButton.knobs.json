@@ -1,0 +1,13 @@
+{
+    "icons": {
+        "label": "icons",
+        "options": [
+            "chevron-up",
+            "chevron-down",
+            "chevron-left",
+            "chevron-right"
+        ],
+        "default": "chevron-up",
+        "group": "material-community"
+    }
+}
