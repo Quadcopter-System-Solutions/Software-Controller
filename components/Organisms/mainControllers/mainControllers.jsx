@@ -4,13 +4,15 @@ import CircleButtonController from '../../Molecules/circleButtonController/circl
 import CircleGestureController from '../../Molecules/circleGestureController/circleGestureController';
 
 
-const MainControllers = () => {
-    return (
-        <View style={Styles.container}>
-            <CircleGestureController />
-            <CircleButtonController />
-        </View>
-    )
+export default class MainControllers extends React.Component {
+    render(){
+        return (
+            <View style={Styles.container}>
+                <CircleGestureController onPanGesture={this.props.onPanGesture} />
+                <CircleButtonController />
+            </View>
+        )
+    }
 }
 
 const Styles = StyleSheet.create({
@@ -21,5 +23,3 @@ const Styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
-
-export default MainControllers

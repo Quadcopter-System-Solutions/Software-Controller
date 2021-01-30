@@ -1,25 +1,27 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native'
 
-const radius = 225
+export const CircleRadius = 225
 
-const Circle = ({ icons=[] }) => {
-    return (
-        <View style={Styles.container}>
-            <View style={Styles.grid}>
-                <View style={[Styles.row, Styles.rowTop]}>
-                    {icons[0]}
-                </View>
-                <View style={[Styles.row, Styles.rowMid]}>
-                    {icons[1]}
-                    {icons[2]}
-                </View>
-                <View style={[Styles.row, Styles.rowBot]}>
-                    {icons[3]}
+class Circle extends React.Component {
+    render(){
+        return (
+            <View style={Styles.container}>
+                <View style={Styles.grid}>
+                    <View style={[Styles.row, Styles.rowTop]}>
+                        {this.props.icons && this.props.icons[0]}
+                    </View>
+                    <View style={[Styles.row, Styles.rowMid]}>
+                        {this.props.icons && this.props.icons[1]}
+                        {this.props.icons && this.props.icons[2]}
+                    </View>
+                    <View style={[Styles.row, Styles.rowBot]}>
+                        {this.props.icons && this.props.icons[3]}
+                    </View>
                 </View>
             </View>
-        </View>
-    )
+        )
+    }
 }
 
 const Styles = StyleSheet.create({
@@ -27,9 +29,9 @@ const Styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.1)',
         borderWidth: 2,
         borderColor: 'gray',
-        borderRadius: radius/2,
-        height: radius,
-        width: radius,
+        borderRadius: CircleRadius/2,
+        height: CircleRadius,
+        width: CircleRadius,
     },
     grid: {
         flex: 1,
