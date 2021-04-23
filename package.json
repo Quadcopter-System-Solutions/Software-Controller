@@ -1,45 +1,48 @@
 {
-  "name": "controller",
-  "version": "0.0.1",
-  "private": true,
+  "name": "controller_components",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "build": "rollup -c",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook",
+    "prestorybook": "rnstl"
   },
   "dependencies": {
-    "@capacitor/core": "2.4.2",
-    "@capacitor/ios": "^2.4.2",
-    "@ionic-native/core": "^5.29.0",
-    "@ionic/vue": "^5.4.0",
-    "@ionic/vue-router": "^5.4.0",
-    "core-js": "^3.6.5",
-    "ionicons": "^5.2.3",
-    "vue": "^3.0.0-0",
-    "vue-axios": "^3.0.1",
-    "vue-router": "^4.0.0-0"
+    "expo": "~40.0.0",
+    "expo-status-bar": "~1.0.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-elements": "^3.1.0",
+    "react-native-gesture-handler": "~1.8.0",
+    "react-native-reanimated": "~1.13.0",
+    "react-native-vector-icons": "^7.1.0",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@capacitor/cli": "2.4.2",
-    "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0-0",
-    "@vue/eslint-config-typescript": "^5.0.2",
-    "@vue/test-utils": "^2.0.0-0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0",
-    "typescript": "~3.9.3",
-    "vue-jest": "^5.0.0-0"
+    "@babel/core": "~7.9.0",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.23",
+    "@storybook/react-native": "^5.3.23",
+    "@storybook/react-native-server": "^5.3.23",
+    "babel-loader": "^8.2.2",
+    "react-native-storybook-loader": "^2.0.2"
   },
-  "description": "An Ionic project"
+  "private": true,
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./components"
+      ],
+      "pattern": "**/**/*.stories.jsx"
+    }
+  }
 }
