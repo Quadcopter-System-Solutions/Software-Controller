@@ -20,5 +20,5 @@ const Styles = StyleSheet.create({
 })
 
 
-export default YourApp;
-// export {default} from '../storybook';
+// export default YourApp;
+export {default} from '../storybook';

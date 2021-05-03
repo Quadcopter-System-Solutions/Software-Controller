@@ -8,8 +8,10 @@ function loadStories() {
   require("../components/Atoms/iconButton/iconButton.stories");
   require("../components/Molecules/circleButtonController/circleButtonController.stories");
   require("../components/Molecules/circleGestureController/circleGestureController.stories");
+  require("../components/Molecules/settingsField/settingsField.stories");
   require("../components/Organisms/mainControllers/mainControllers.stories");
   require("../components/Pages/QuadControllerPage/QuadControllerPage.stories");
+  require("../components/Pages/SettingsPage/SettingsPage.stories");
 }
 
 const stories = [
@@ -17,8 +19,10 @@ const stories = [
   "../components/Atoms/iconButton/iconButton.stories",
   "../components/Molecules/circleButtonController/circleButtonController.stories",
   "../components/Molecules/circleGestureController/circleGestureController.stories",
+  "../components/Molecules/settingsField/settingsField.stories",
   "../components/Organisms/mainControllers/mainControllers.stories",
   "../components/Pages/QuadControllerPage/QuadControllerPage.stories",
+  "../components/Pages/SettingsPage/SettingsPage.stories",
 ];
 
 module.exports = {
