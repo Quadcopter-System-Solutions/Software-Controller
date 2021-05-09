@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Text, ImageBackground } from "react-native";
 import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import IconButton from "../../Atoms/iconButton/iconButton";
 import MainControllers from "../../Organisms/mainControllers/mainControllers";
+import { useWebsocket } from "../../Particles/hooks";
 
 const onClickHandler = (hello) => {
   console.log(hello);
 };
 
 export default QuadControllerPage = (props) => {
+  const insets = useSafeAreaInsets();
+
   const [xVec, setXVec] = useState(0.0);
   const [yVec, setYVec] = useState(0.0);
+  const videoFrame = useWebsocket();
 
   const handlePanGesture = (x, y) => {
     setXVec(x);
@@ -18,8 +23,16 @@ export default QuadControllerPage = (props) => {
   };
 
   return (
-    <View style={Styles.container}>
-      <View style={Styles.controllers}>
+    <ImageBackground
+      style={Styles.container}
+      source={{ uri: `data:image/png;base64,${videoFrame}` }}
+    >
+      <View
+        style={[
+          Styles.controllers,
+          { paddingLeft: insets.left, paddingRight: insets.right },
+        ]}
+      >
         <MainControllers onPanGesture={handlePanGesture} />
       </View>
       <View style={Styles.navBar}>
@@ -46,7 +59,7 @@ export default QuadControllerPage = (props) => {
           />
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -72,8 +85,12 @@ const Styles = StyleSheet.create({
   },
   navBarText: {
     margin: 5,
+    color: "white",
     fontWeight: "bold",
     fontSize: 13,
+    textShadowColor: "#585858",
+    textShadowOffset: { width: 5, height: 5 },
+    textShadowRadius: 10,
   },
   navBarSettings: {
     alignItems: "flex-end",
