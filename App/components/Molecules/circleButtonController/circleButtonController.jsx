@@ -11,7 +11,7 @@ const onClickHandler = (hello) => {
   console.log(hello);
 };
 
-const CircleButtonController = ({ icons = [] }) => {
+const CircleButtonController = () => {
   return (
     <Circle
       icons={[

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Text, ImageBackground } from "react-native";
+import React, { useMemo, useState } from "react";
+import { ImageBackground } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Grid, Row } from "react-native-easy-grid";
 import IconButton from "../../Atoms/iconButton/iconButton";
 import MainControllers from "../../Organisms/mainControllers/mainControllers";
 import { useWebsocket } from "../../Particles/hooks";
@@ -20,45 +21,44 @@ export default QuadControllerPage = (props) => {
   const handlePanGesture = (x, y) => {
     setXVec(x);
     setYVec(y);
+    console.log(x, y);
   };
+
+  const controls = useMemo(() => {
+    return (
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <MainControllers onPanGesture={handlePanGesture} />
+      </View>
+    );
+  }, []);
+
+  const bottomNav = useMemo(() => {
+    return (
+      <View style={Styles.bottomNav}>
+        <IconButton
+          onPress={() => onClickHandler("settings")}
+          icon={{
+            name: "cog",
+            type: "font-awesome",
+            color: "black",
+          }}
+        />
+      </View>
+    );
+  }, []);
 
   return (
     <ImageBackground
       style={Styles.container}
       source={{ uri: `data:image/png;base64,${videoFrame}` }}
     >
-      <View
-        style={[
-          Styles.controllers,
-          { paddingLeft: insets.left, paddingRight: insets.right },
-        ]}
+      <Grid
+        style={{ paddingLeft: insets.bottom, paddingRight: insets.top }}
+        justifyContent="space-between"
       >
-        <MainControllers onPanGesture={handlePanGesture} />
-      </View>
-      <View style={Styles.navBar}>
-        <View style={Styles.navBarTextContainer}>
-          <View>
-            <Text style={Styles.navBarText}>
-              X Vector: {(xVec * 100).toFixed(2)} %
-            </Text>
-          </View>
-          <View>
-            <Text style={Styles.navBarText}>
-              Y Vector: {(yVec * 100).toFixed(2)} %
-            </Text>
-          </View>
-        </View>
-        <View style={Styles.navBarSettings}>
-          <IconButton
-            onPress={() => onClickHandler("settings")}
-            icon={{
-              name: "cog",
-              type: "font-awesome",
-              color: "black",
-            }}
-          />
-        </View>
-      </View>
+        <Row size={8}>{controls}</Row>
+        <Row size={1}>{bottomNav}</Row>
+      </Grid>
     </ImageBackground>
   );
 };
@@ -69,31 +69,12 @@ const Styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "white",
   },
-  controllers: {
+  bottomNav: {
     flex: 1,
-    justifyContent: "flex-start",
-  },
-  navBar: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  navBarTextContainer: {
-    flexDirection: "column",
-  },
-  navBarText: {
-    margin: 5,
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 13,
-    textShadowColor: "#585858",
-    textShadowOffset: { width: 5, height: 5 },
-    textShadowRadius: 10,
-  },
-  navBarSettings: {
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
   },
 });
