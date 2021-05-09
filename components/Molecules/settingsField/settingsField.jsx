@@ -1,14 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text } from 'react-native'
+import React from "react";
+import { StyleSheet, Text } from "react-native";
 
 const SettingsField = () => {
-    return (
-        <Text>Settings Field</Text>
-    )
-}
+  return <Text>Settings Field</Text>;
+};
 
-const Styles = StyleSheet.create({
+const Styles = StyleSheet.create({});
 
-})
-
-export default SettingsField
+export default SettingsField;
