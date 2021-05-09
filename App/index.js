@@ -1,22 +1,14 @@
 import React from "react";
-import { Text, View, SafeAreaView, StyleSheet } from "react-native";
-import QuadControllerPage from "../components/Pages/QuadControllerPage/QuadControllerPage";
+import { App } from "./App";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-const YourApp = () => {
+const contextApp = () => {
   return (
-    <SafeAreaView style={Styles.container}>
-      <QuadControllerPage />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
   );
 };
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
-// export default YourApp;
-export { default } from "../storybook";
+export default contextApp;
+// export { default } from "../storybook";

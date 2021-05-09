@@ -8,7 +8,7 @@ const onClickHandler = (hello) => {
   console.log(hello);
 };
 
-export default QuadControllerPage = () => {
+export default QuadControllerPage = (props) => {
   const [xVec, setXVec] = useState(0.0);
   const [yVec, setYVec] = useState(0.0);
 
@@ -54,6 +54,7 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
+    backgroundColor: "white",
   },
   controllers: {
     flex: 1,
